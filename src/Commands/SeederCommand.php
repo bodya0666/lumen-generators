@@ -1,6 +1,8 @@
 <?php namespace Wn\Generators\Commands;
 
 
+use Illuminate\Support\Str;
+
 class SeederCommand extends BaseCommand {
 
 	protected $signature = 'wn:seeder
@@ -32,7 +34,7 @@ class SeederCommand extends BaseCommand {
     protected function getSeederName($name)
     {
         $name = explode("\\", $name);
-        $name = ucwords(str_plural($name[count($name) - 1]));
+        $name = ucwords(Str::plural($name[count($name) - 1]));
         $name = $name . 'TableSeeder';
         return $name;
     }

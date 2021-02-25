@@ -1,6 +1,8 @@
 <?php namespace Wn\Generators\Commands;
 
 
+use Illuminate\Support\Str;
+
 class PivotTableCommand extends BaseCommand {
 
 	protected $signature = 'wn:pivot-table
@@ -33,7 +35,7 @@ class PivotTableCommand extends BaseCommand {
     protected function parseTables()
     {
         $this->tables = array_map(function($arg) {
-            return snake_case(str_singular($this->argument($arg)));
+            return Str::snake(Str::singular($this->argument($arg)));
         }, ['model1', 'model2']);
 
         sort($this->tables);

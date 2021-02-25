@@ -1,6 +1,8 @@
 <?php namespace Wn\Generators\Commands;
 
 
+use Illuminate\Support\Str;
+
 class MigrationCommand extends BaseCommand {
 
     protected $signature = 'wn:migration
@@ -20,8 +22,8 @@ class MigrationCommand extends BaseCommand {
     public function handle()
     {
         $table = $this->argument('table');
-        $name = 'Create' . ucwords(camel_case($table));
-        $snakeName = snake_case($name);
+        $name = 'Create' . ucwords(Str::camel($table));
+        $snakeName = Str::snake($name);
 
         $content = $this->getTemplate('migration')
             ->with([
@@ -129,7 +131,7 @@ class MigrationCommand extends BaseCommand {
             $key['column'] = 'id';
         }
         if(! $key['table']){
-            $key['table'] = str_plural(substr($key['name'], 0, count($key['name']) - 4));
+            $key['table'] = Str::plural(substr($key['name'], 0, count($key['name']) - 4));
         }
 
         $constraint = $this->getTemplate('migration/foreign-key')

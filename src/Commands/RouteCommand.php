@@ -1,6 +1,7 @@
 <?php namespace Wn\Generators\Commands;
 
 
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class RouteCommand extends BaseCommand {
@@ -68,7 +69,7 @@ class RouteCommand extends BaseCommand {
     {
         $controller = $this->option('controller');
         if(! $controller){
-            $controller = ucwords(str_plural(camel_case($this->argument('resource')))) . 'Controller';
+            $controller = ucwords(Str::plural(Str::camel($this->argument('resource')))) . 'Controller';
         }
         return $controller;
     }
